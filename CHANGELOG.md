@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.2.3 4/5/2018
+
+* Correctly parameterize the app name in the self:update command help text.
+* Hide progress indicator prior to 'exec'. (#707)
+* Fix path to test script in try:para
+* Dependencies.io config for version 2 preview by Dave Gaeddert (#699)
+
 ### 1.2.2 2/27/2018
 
 * Experimental robo plugin mechanism (backwards compatibility not yet guarenteed)
