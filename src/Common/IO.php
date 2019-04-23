@@ -112,14 +112,16 @@ trait IO
     protected function formattedOutput($text, $length, $format)
     {
         $lines = explode("\n", trim($text, "\n"));
-        $maxLineLength = array_reduce(array_map('strlen', $lines), 'max');
+        $maxLineLength = array_reduce(array_map('mb_strlen', $lines), 'max');
         $length = max($length, $maxLineLength);
         $len = $length + 2;
         $space = str_repeat(' ', $len);
         $this->writeln(sprintf($format, $space));
         foreach ($lines as $line) {
-            $line = str_pad($line, $length, ' ', STR_PAD_BOTH);
-            $this->writeln(sprintf($format, " $line "));
+            $diff = $length - mb_strlen($line);
+            $offset = str_repeat(' ', $diff % 2);
+            $padding = str_repeat(' ', floor($diff / 2));
+            $this->writeln(sprintf($format, $padding . $line . $padding . $offset));
         }
         $this->writeln(sprintf($format, $space));
     }
